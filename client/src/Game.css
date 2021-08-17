@@ -1,0 +1,28 @@
+
+
+.board .row {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board .cell {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #00000073;
+}
+
+.symbol{
+  font-size: 100px;
+}
+
+.flex {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
