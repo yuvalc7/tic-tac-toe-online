@@ -10,7 +10,7 @@ const leaveGameOrDisconnectFactory = require('./handlers/leaveGameOrDisconnectFa
 const createGameFactory = require('./handlers/createGameFactory');
 const joinGameFactory = require('./handlers/joinGameFactory');
 
-const isWinnerFactory = require('./handlers/isWinnerFactory');
+const isWinnerOrTieFactory = require('./handlers/isWinnerOrTieFactory');
 
 const sendGames = require('./helpers/sendGames');
 
@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
 
   socket.on('mark-piece', markPieceFactory({ io, socket }));
 
-  socket.on('check-if-winner', isWinnerFactory({ socket}));
+  socket.on('check-if-winner-or-tie', isWinnerOrTieFactory({ socket}));
 
   socket.on('leave-game', leaveGameOrDisconnectFactory({ socket, io }));
 

@@ -43,7 +43,7 @@ function App() {
   };
 
   const isWinner = () => {
-    socket.emit('check-if-winner')
+    socket.emit('check-if-winner-or-tie')
   }
 
 
@@ -102,6 +102,15 @@ function App() {
       setSymbol('');
       setPage(PAGE_LOBBY);
     });
+
+    newSocket.on("tie", () => {
+      alert(`Tie !! game over !`);
+      setGameId(null);
+      setGame({ board: [] });
+      setSymbol("");
+      setPage(PAGE_LOBBY);
+    });
+
     setSocket(newSocket);
   }, []);
 

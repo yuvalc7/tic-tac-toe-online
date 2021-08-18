@@ -70,10 +70,11 @@ exports.endGame = ({ player, winner }) => {
   if (!game) return;
   games.splice(games.indexOf(game), 1);
   game.players.forEach((currentPlayer) => {
-
-    if (winner) {
-      game.winner = true;  
-      currentPlayer.socket.emit('winner',winner);
+    if (winner === "Tie") {
+      currentPlayer.socket.emit("tie");
+    }
+    if (winner === "O" || winner == "X") {
+      currentPlayer.socket.emit("winner", winner);
     }
     if (player !== currentPlayer.socket ){
       currentPlayer.socket.emit('end-game');
@@ -110,6 +111,21 @@ exports.isGameOver = ({ player }) => {
               ans = true;
             }
           })
+
+
+  //check for tie
+  if (!ans) {
+    let isTie = true;
+    newArr.forEach((cell) => {
+      if (cell === 0) {
+        isTie = false;
+      }
+    });
+    if (isTie) {
+      return "Tie";
+    }
+  }        
+
   let symbol =  game.turn === 'X' ? 'O' : 'X';    
   ans = ans ? symbol : false;   
   return ans;
